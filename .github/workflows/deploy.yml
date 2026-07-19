@@ -1,6 +1,6 @@
 name: Build and Deploy
 on:
-  workflow_dispatch: 
+  workflow_dispatch: # 手动触发，工作流上面会出现一个按钮，点击后会触发工作流的运行
   push:
     branches: [main]
 permissions:
@@ -23,8 +23,9 @@ jobs:
           pnpm install
           pnpm xlsx2json
           pnpm build
+          echo "love-your-life.sudot.net" > template/public/CNAME
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: template # The folder the action should deploy.
+          folder: template/public # The folder the action should deploy.
